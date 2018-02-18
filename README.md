@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/ashleymcnamara/gophers/blob/master/KUBERNETES_GOPHER.png" width="300"></p>
+<p align="center"><img src="https://github.com/ashleymcnamara/gophers/blob/master/KUBERNETES_GOPHER.png" width="400"></p>
 
 <p align="center"><b>Configuring ElasticSearch logging for your Kubernetes cluster.</b></p>
 
@@ -50,7 +50,7 @@ Sources used while working on this repository:
 3. [https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/]
 4. [https://github.com/reevoo/fluent-plugin-systemd]
 
-ScalableSystemDesign: https://scalablesystem.design/lesson/kubernetes-logging-elk/
+[ScalableSystemDesign]: https://scalablesystem.design/lesson/kubernetes-logging-elk/
 [https://github.com/kubernetes-incubator/kubespray/tree/master/roles/kubernetes-apps/efk/fluentd]: https://github.com/kubernetes-incubator/kubespray/tree/master/roles/kubernetes-apps/efk/fluentd
 [https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch]: https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch
 [https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/]: https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/
