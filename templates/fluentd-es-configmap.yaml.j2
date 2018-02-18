@@ -1,0 +1,78 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ fluentd_es_config }}
+  namespace: kube-system
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+data:
+  system.conf: |-
+    <system>
+      root_dir /tmp/fluentd-buffers/
+    </system>
+
+  containers.input.conf: |-
+    <source>
+      @id fluentd-containers.log
+      @type tail
+      path /var/log/containers/*.log
+      pos_file /var/log/es-containers.log.pos
+      time_format %Y-%m-%dT%H:%M:%S.%NZ
+      tag raw.kubernetes.*
+      format json
+      read_from_head true
+    </source>
+
+  system.input.conf: |-
+    <source>
+      @id journald-kubelet
+      @type systemd
+      path /run/log/journal
+      filters [{ "_SYSTEMD_UNIT": "kubelet.service" }]
+      <storage>
+        @type local
+        persistent false
+      </storage>
+      <entry>
+        field_map {"MESSAGE": "log", "_PID": ["process", "pid"], "_CMDLINE": "process", "_COMM": "cmd"}
+        fields_strip_underscores true
+        fields_lowercase true
+      </entry>
+      read_from_head true
+      tag kubelet
+    </source>
+
+  forward.input.conf: |-
+    # Takes the messages sent over TCP
+    <source>
+      @type forward
+    </source>
+
+  output.conf: |-
+    # Enriches records with Kubernetes metadata
+    <filter kubernetes.**>
+      @type kubernetes_metadata
+    </filter>
+
+    <match **>
+      @id elasticsearch
+      @type elasticsearch
+      @log_level info
+      include_tag_key true
+      host elasticsearch
+      port 9200
+      logstash_format true
+      <buffer>
+        @type file
+        path /var/log/fluentd-buffers/kubernetes.system.buffer
+        flush_mode interval
+        retry_type exponential_backoff
+        flush_thread_count 2
+        flush_interval 5s
+        retry_forever
+        retry_max_interval 30
+        chunk_limit_size 2M
+        queue_limit_length 8
+        overflow_action block
+      </buffer>
+    </match>

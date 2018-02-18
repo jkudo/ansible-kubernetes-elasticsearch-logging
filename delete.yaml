@@ -1,0 +1,61 @@
+- name: installs ElasticSearch  
+  hosts: 127.0.0.1
+  connection: local
+  tasks:    
+    - name: Delete ElasticSearch fluentd DaemonSet
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f ~/google/123/elastic/fluentd-es-ds.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Delete ElasticSearch fluentd ConfigMap
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f ~/google/123/elastic/fluentd-es-configmap.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Delete Kibana deployment
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f ~/google/123/elastic/kibana-deployment.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Delete Kibana ConfigMap
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f ~/google/123/elastic/kibana-configmap.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Delete Kibana Service
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f ~/google/123/elastic/kibana-service.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Delete stateful data pods
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-data-stateful.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Delete stateful data service
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-data-svc.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Delete PersistentVolumeClaim
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-pv-claim.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Delete PersistentVolume
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-pv-volume.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Create ElasticSearch client
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-client.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Create ElasticSearch master
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-master.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Create ElasticSearch service
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-svc.yaml --namespace=kube-system
+      ignore_errors: yes
+
+    - name: Create ElasticSearch discovery service
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-discovery-svc.yaml --namespace=kube-system
+      ignore_errors: yes 
+
+    - name: Unlabel nodes
+      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} label nodes {{ item }} beta.kubernetes.io/fluentd-ds-ready- --namespace=kube-systemb
+      with_items:
+        - "{{ nodes }}"
+      ignore_errors: yes
