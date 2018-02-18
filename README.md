@@ -21,12 +21,12 @@ journald (playbooks are meant for CentOS 7 servers).
 Kubana configuration:
 
 ```yaml
-    xpack.graph.enabled: false
-    xpack.ml.enabled: false
-    xpack.monitoring.enabled: false
-    xpack.reporting.enabled: false
-    xpack.security.enabled: false
-    xpack.watcher.enabled: false
+xpack.graph.enabled: false
+xpack.ml.enabled: false
+xpack.monitoring.enabled: false
+xpack.reporting.enabled: false
+xpack.security.enabled: false
+xpack.watcher.enabled: false
 ```
 
 ## Installing
