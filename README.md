@@ -6,6 +6,7 @@
 
 > This course is a part of series of Kubernetes articles located at [ScalableSystemDesign]
 
+
 `kubectl` and `ansible` must be installed beforehand. 
 
 Playbooks here will help you install logging using ElasticSearch for your Kubernetes cluster.
