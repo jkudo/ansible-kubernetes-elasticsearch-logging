@@ -4,7 +4,7 @@
 
 # Intro #
 
-This course is a part of series of Kubernetes articles located at [https://scalablesystem.design/lesson/kubernetes-logging-elk/]
+> This course is a part of series of Kubernetes articles located at [ScalableSystemDesign]
 
 `kubectl` and `ansible` must be installed beforehand. 
 
@@ -50,6 +50,7 @@ Sources used while working on this repository:
 3. [https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/]
 4. [https://github.com/reevoo/fluent-plugin-systemd]
 
+ScalableSystemDesign: https://scalablesystem.design/lesson/kubernetes-logging-elk/
 [https://github.com/kubernetes-incubator/kubespray/tree/master/roles/kubernetes-apps/efk/fluentd]: https://github.com/kubernetes-incubator/kubespray/tree/master/roles/kubernetes-apps/efk/fluentd
 [https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch]: https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch
 [https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/]: https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/
