@@ -8,7 +8,11 @@ Playbooks here will help you install logging using ElasticSearch for your Kubern
 
 ## Installing
 
+```bash
 ansible-playbook install.yaml -e 'kubeconfig=admin.conf' --extra-vars='{"nodes": [node1,node2]}' -v
+```
 
 ## Deleting
+```bash
 ansible-playbook delete.yaml -e 'kubeconfig=admin.conf' --extra-vars='{"nodes": [node1,node2]}' -v
+```
