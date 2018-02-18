@@ -2,7 +2,7 @@
 
 # Intro #
 
-<img src="https://github.com/ashleymcnamara/gophers/blob/master/KUBERNETES_GOPHER.png" width="100">
+<img src="https://github.com/ashleymcnamara/gophers/blob/master/KUBERNETES_GOPHER.png" width="300">
 
 Playbooks here will help you install logging using ElasticSearch for your Kubernetes cluster.
 
