@@ -30,27 +30,19 @@
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-data-svc.yaml --namespace=kube-system
       ignore_errors: yes
 
-    - name: Delete PersistentVolumeClaim
-      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-pv-claim.yaml --namespace=kube-system
-      ignore_errors: yes
-
-    - name: Delete PersistentVolume
-      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-pv-volume.yaml --namespace=kube-system
-      ignore_errors: yes
-
-    - name: Create ElasticSearch client
+    - name: Delete ElasticSearch client
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-client.yaml --namespace=kube-system
       ignore_errors: yes
 
-    - name: Create ElasticSearch master
+    - name: Delete ElasticSearch master
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-master.yaml --namespace=kube-system
       ignore_errors: yes
 
-    - name: Create ElasticSearch service
+    - name: Delete ElasticSearch service
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-svc.yaml --namespace=kube-system
       ignore_errors: yes
 
-    - name: Create ElasticSearch discovery service
+    - name: Delete ElasticSearch discovery service
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} delete -f es-discovery-svc.yaml --namespace=kube-system
       ignore_errors: yes 
 

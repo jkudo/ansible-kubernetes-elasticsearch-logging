@@ -16,10 +16,8 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
                 matchExpressions:
                 - key: role
                   operator: In
@@ -68,7 +66,12 @@ spec:
         volumeMounts:
         - name: storage
           mountPath: {{ host_data_path }}
-      volumes:
-      - name: storage
-        persistentVolumeClaim:
-          claimName: es-pv-claim
+  volumeClaimTemplates:
+  - metadata:
+      name: storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: local-storage
+      resources:
+        requests:
+          storage: {{ volume_claim }}

@@ -1,4 +1,4 @@
-- name: installs ElasticSearch  
+- name: Install ElasticSearch  
   hosts: 127.0.0.1
   connection: local
   vars:
@@ -12,7 +12,6 @@
     - master_java_opts: -Xms1024m -Xmx1024m
     - client_java_opts: -Xms1024m -Xmx1024m
     - data_java_opts: -Xms1024m -Xmx1024m
-    - volume_size: 100Gi
     - volume_claim: 50Gi
     - host_data_path: /data
     - fluentd_es_config: fluentd-es-config-v0.1.3
@@ -48,14 +47,6 @@
 
     - name: Wait ElasticSearch client
       local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} rollout status -f es-client.yaml --namespace=kube-system
-      ignore_errors: yes
-
-    - name: Create PersistentVolume
-      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} create -f es-pv-volume.yaml --namespace=kube-system
-      ignore_errors: yes
-
-    - name: Create PersistentVolumeClaim
-      local_action: command /usr/local/bin/kubectl --kubeconfig={{ kubeconfig }} create -f es-pv-claim.yaml --namespace=kube-system
       ignore_errors: yes
 
     - name: Create stateful data service
