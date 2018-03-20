@@ -19,7 +19,7 @@ journald (playbooks are meant for CentOS 7 servers).
 | ElasticSearch   | 6.1.2        |
 | Kibana          | 6.1.2        |
 
-Kubana configuration:
+Kibana configuration:
 
 ```yaml
 xpack.graph.enabled: false
